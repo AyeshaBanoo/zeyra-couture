@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block content %}
+
+<h1 class="cart-title">Your Cart</h1>
+
+<div class="cart-container">
+
+{% for product in cart %}
+
+<div class="cart-card">
+
+    <img class="cart-image" src="{{ url_for('static', filename='uploads/' + product.image) }}">
+
+    <div class="cart-info">
+
+        <h2>{{ product.name }}</h2>
+
+        <p class="price">₹{{ product.price }}</p>
+
+        <p><strong>Color:</strong> {{ product.color }}</p>
+
+        <p><strong>Size:</strong> {{ product.size }}</p>
+
+        <div class="quantity-box">
+
+            <a href="/decrease_quantity/{{ product.id }}">
+                <button>-</button>
+            </a>
+
+            <span>{{ product.quantity }}</span>
+
+            <a href="/increase_quantity/{{ product.id }}">
+                <button>+</button>
+            </a>
+
+        </div>
+
+        <p class="subtotal">
+            Total: ₹{{ product.price * product.quantity }}
+        </p>
+
+        <a href="/remove_from_cart/{{ product.id }}">
+            <button class="remove-btn">
+                Remove Item
+            </button>
+        </a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="cart-summary">
+
+    <h2>Total : ₹{{ total }}</h2>
+
+    <a href="/request_order">
+        <button class="checkout-btn">
+            Request Order
+        </button>
+    </a>
+
+</div>
+
+{% endblock %}

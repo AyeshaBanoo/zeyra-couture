@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Orders
+{% endblock %}
+
+{% block content %}
+
+<h1 class="orders-heading">My Orders</h1>
+
+{% if orders %}
+
+{% for order in orders %}
+
+<div class="order-card">
+
+    <div class="order-header">
+        <h2>Order #{{ order.order_id }}</h2>
+
+        <div class="order-info">
+            <span class="status-badge">{{ order.status }}</span>
+            <span class="total-badge">₹{{ order.total }}</span>
+        </div>
+    </div>
+
+    <hr>
+
+    {% for item in order["items"] %}
+
+    <div class="order-product">
+
+        <img
+            src="{{ url_for('static', filename='uploads/' + item.image) }}"
+            alt="{{ item.product_name }}"
+            class="order-product-image"
+        >
+
+        <div class="order-product-details">
+
+            <h3>{{ item.product_name }}</h3>
+
+            <p><strong>Color:</strong> {{ item.color }}</p>
+
+            <p><strong>Size:</strong> {{ item.size }}</p>
+
+            <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+
+        </div>
+
+    </div>
+
+    {% if not loop.last %}
+    <hr class="product-divider">
+    {% endif %}
+
+    {% endfor %}
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="empty-orders">
+    <h2>No Orders Yet</h2>
+    <p>You haven't placed any orders.</p>
+
+    <a href="/products" class="shop-btn">
+        Continue Shopping
+    </a>
+</div>
+
+{% endif %}
+
+{% endblock %}

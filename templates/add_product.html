@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Product
+{% endblock %}
+
+{% block content %}
+
+<div class="add-product-container">
+
+    <h1 class="add-product-title">
+        Add New Product
+    </h1>
+
+    <form
+        action="/admin/add_product"
+        method="POST"
+        enctype="multipart/form-data"
+        class="add-product-form"
+    >
+
+        <label>Product Image</label>
+
+        <input
+            type="file"
+            name="image"
+            accept="image/*"
+            required
+        >
+
+        <label>Product Name</label>
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Enter Product Name"
+            required
+        >
+
+        <label>Price (₹)</label>
+
+        <input
+            type="number"
+            name="price"
+            placeholder="Enter Price"
+            required
+        >
+
+        <label>Description</label>
+
+        <textarea
+            name="description"
+            placeholder="Write Product Description..."
+            required
+        ></textarea>
+
+        <label>Color</label>
+
+        <input
+            type="text"
+            name="color"
+            placeholder="Example : Lavender"
+            required
+        >
+
+        <h3 class="size-heading">
+            Available Sizes
+        </h3>
+
+        <div class="add-size-grid">
+
+            <label class="add-size-card">
+                <input type="checkbox" name="sizes" value="S">
+                S
+            </label>
+
+            <label class="add-size-card">
+                <input type="checkbox" name="sizes" value="M">
+                M
+            </label>
+
+            <label class="add-size-card">
+                <input type="checkbox" name="sizes" value="L">
+                L
+            </label>
+
+            <label class="add-size-card">
+                <input type="checkbox" name="sizes" value="XL">
+                XL
+            </label>
+
+            <label class="add-size-card">
+                <input type="checkbox" name="sizes" value="XXL">
+                XXL
+            </label>
+
+        </div>
+
+        <button
+            type="submit"
+            class="add-product-btn"
+        >
+            Add Product
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

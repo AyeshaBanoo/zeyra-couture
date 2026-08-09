@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}
+Manage Products
+{% endblock %}
+
+{% block content %}
+
+<div class="manage-container">
+
+    <h1 class="manage-title">
+        Manage Products
+    </h1>
+
+    <div class="manage-add">
+
+        <a href="/admin/add_product">
+
+            <button class="manage-add-btn">
+                + Add Product
+            </button>
+
+        </a>
+
+    </div>
+
+    <div class="manage-list">
+
+    {% for product in products %}
+
+        <div class="manage-card">
+
+            <img
+            src="{{ url_for('static', filename='uploads/' + product.image) }}"
+            class="manage-image"
+            >
+
+            <div class="manage-info">
+
+                <h2>{{ product.name }}</h2>
+
+                <p class="manage-price">
+                    ₹{{ product.price }}
+                </p>
+
+            </div>
+
+            <div class="manage-buttons">
+
+                <a href="/admin/edit_product/{{ product.id }}">
+
+                    <button class="manage-edit-btn">
+                        Edit
+                    </button>
+
+                </a>
+
+                <a href="/admin/delete_product/{{ product.id }}">
+
+                    <button class="manage-delete-btn">
+                        Delete
+                    </button>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

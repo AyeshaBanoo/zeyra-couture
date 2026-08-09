@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Profile
+{% endblock %}
+{% block content %}
+<h1>Welcome {{ user.name }}</h1>
+
+<h3>Email</h3>
+<p>{{ user.email }}</p>
+<h3>Phone</h3>
+<p>{{ user.phone }}</p>
+<p>Address: {{ user.address }}</p>
+
+<p>Pincode: {{ user.pincode }}</p>
+<br>
+
+<a href="/my_orders">
+
+<button>
+
+My Orders
+
+</button>
+
+</a>
+<a href="/edit_profile">
+    <button>Edit Profile</button>
+</a>
+<a href="/logout">
+    <button>logout</button>
+</a>
+{% endblock %}

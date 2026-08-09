@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}
+Order Summary
+{% endblock %}
+{% block content %}
+<div class="order-summary">
+<h1>Order Summary</h1>
+<h2>Order ID : {{ order_id }}</h2>
+<p><b>Name:</b> {{ name }}</p>
+<p><b>Phone:</b> {{ phone }}</p>
+<p><b>Address:</b> {{ address }}</p>
+<p><b>Pincode:</b> {{ pincode }}</p>
+<h2>Products</h2>
+{% for item in cart %}
+<p>
+{{ item.name }}
+× {{ item.quantity }}
+= ₹{{ item.price * item.quantity }}
+</p>
+{% endfor %}
+<hr>
+<p>Products Total : ₹{{ total }}</p>
+<p>Delivery Charge : ₹80</p>
+<h2>Grand Total : ₹{{ grand_total }}</h2>
+<form action="/order_success" method="POST">
+    <button type="submit">Submit Order Request</button>
+</form>
+</div>
+{% endblock %}

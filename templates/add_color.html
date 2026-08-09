@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Color
+{% endblock %}
+
+{% block content %}
+
+<h1>Add Color</h1>
+
+<form class="auth-form"
+action="/add_color/{{ product.id }}"
+method="POST"
+enctype="multipart/form-data">
+
+<label>Color Name</label>
+<br>
+
+<input
+type="text"
+name="color"
+required>
+
+<br><br>
+
+<label>Choose Image</label>
+<br>
+
+<input
+type="file"
+name="image"
+accept="image/*"
+required>
+
+<br><br>
+
+<button type="submit">
+Add Color
+</button>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Zeyra Couture{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        ZEYRA COUTURE
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/products">Products</a>
+
+        <a href="/cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+
+        {% if session.get("user") %}
+
+            <a href="/profile" class="profile-menu">
+                <i class="fa-solid fa-user"></i>
+                Hi, {{ session["user"]["name"] }}
+            </a>
+
+            <a href="/logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+
+        {% else %}
+
+            <a href="/login" class="profile-menu">
+                <i class="fa-solid fa-user"></i>
+                Login
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+{% block content %}
+{% endblock %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="flash-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+</body>
+
+</html>

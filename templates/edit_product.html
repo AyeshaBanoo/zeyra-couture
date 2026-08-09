@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Product
+{% endblock %}
+
+{% block content %}
+
+<div class="edit-container">
+
+    <h1 class="edit-title">
+        Edit Product
+    </h1>
+
+    <form action="/admin/edit_product/{{ product.id }}" method="POST">
+
+        <label>Product Name</label>
+
+        <input
+            type="text"
+            name="name"
+            value="{{ product.name }}"
+            required
+        >
+
+        <label>Price (₹)</label>
+
+        <input
+            type="number"
+            name="price"
+            value="{{ product.price }}"
+            required
+        >
+
+        <label>Description</label>
+
+        <textarea
+            name="description"
+            required
+        >{{ product.description }}</textarea>
+
+        <h2 class="edit-subtitle">
+            Available Colors
+        </h2>
+
+        {% for color in product.colors %}
+
+        <div class="color-box">
+
+            <img
+                src="{{ url_for('static', filename='uploads/' + color.image) }}"
+                class="color-image"
+            >
+
+            <div class="color-details">
+
+                <h3>{{ color.name }}</h3>
+
+                <a href="/delete_color/{{ product.id }}/{{ loop.index0 }}">
+
+                    <button
+                        type="button"
+                        class="delete-color-btn">
+
+                        Delete Color
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        <div class="add-color">
+
+            <a href="/add_color/{{ product.id }}">
+
+                <button
+                    type="button"
+                    class="add-color-btn">
+
+                    + Add New Color
+
+                </button>
+
+            </a>
+
+        </div>
+
+        <h2 class="edit-subtitle">
+            Available Sizes
+        </h2>
+
+        <div class="size-grid">
+
+            {% for size in ["S","M","L","XL","XXL"] %}
+
+            <label class="size-card">
+
+                <input
+                    type="checkbox"
+                    name="sizes"
+                    value="{{ size }}"
+
+                    {% if size in product.sizes %}
+                    checked
+                    {% endif %}
+                >
+
+                {{ size }}
+
+            </label>
+
+            {% endfor %}
+
+        </div>
+
+        <button
+            type="submit"
+            class="save-product-btn">
+
+            Save Changes
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

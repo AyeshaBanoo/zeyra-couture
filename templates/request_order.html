@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+Request Order
+{% endblock %}
+{% block content %}
+<div class="request-form">
+<h1>Request Your Order</h1>
+<form action="/order_summary" method="POST">
+    <label>Full Name</label>
+    <input type="text" name="name"  value="{{ session['user']['name'] }}"
+    required>
+    <label>Phone Number</label>
+    <input type="text" name="phone"   value="{{ session['user']['phone'] }}" required>
+    <label>Delivery Address</label>
+    <textarea name="address" required>{{ session['user']['address'] }}</textarea>
+    <label>Pincode</label> 
+    <input type="text"name="pincode"   value="{{ session['user']['pincode'] }}" required>
+    <button type="submit">
+        Continue
+    </button>
+</form>
+</div>
+{% endblock %}

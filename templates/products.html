@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+Products
+{% endblock %}
+
+{% block content %}
+
+<form class="search-form" method="GET" action="/products">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search products..."
+        value="{{ request.args.get('search', '') }}"
+    >
+
+    <button type="submit">Search</button>
+
+</form>
+
+
+<div class="product-grid">
+
+    {% for product in products %}
+
+    <div class="product-card">
+
+        <img
+            src="{{ url_for('static', filename='uploads/' + product.image) }}"
+            alt="{{ product.name }}"
+            class="product-image"
+        >
+
+        <div class="product-info">
+
+            <div class="product-price-row">
+
+                <p class="product-price">
+                    ₹{{ product.price }}
+                </p>
+
+                <a
+                    href="/product/{{ product.id }}"
+                    class="quick-cart"
+                >
+                    🛍️+
+                </a>
+
+            </div>
+
+            <p class="product-name">
+                {{ product.name }}
+            </p>
+
+            <a
+                href="/product/{{ product.id }}"
+                class="view-product"
+            >
+                View Product
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

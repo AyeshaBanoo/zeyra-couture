@@ -1,0 +1,37 @@
+<nav class="navbar">
+
+    <div class="logo">
+        Zeyra Couture
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/products">Products</a>
+
+        <a href="/cart">
+    <i class="fa-solid fa-cart-shopping"></i>
+</a>
+
+        {% if session.user %}
+
+            <a href="/profile">
+    <i class="fa-solid fa-user"></i>
+</a>
+
+            <a href="/logout">
+    <i class="fa-solid fa-right-from-bracket"></i>
+</a>
+
+        {% else %}
+
+            <a href="/login">
+    <i class="fa-solid fa-right-to-bracket"></i>
+</a>
+
+        {% endif %}
+
+    </div>
+
+</nav>

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ product.name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="product-details">
+
+    <img
+    id="mainImage"
+    src="{{ url_for('static', filename='uploads/' +colors[0].image) }}"
+    width="50"
+    >
+    <div class="details">
+    <h3>Available Colors</h3>
+
+{% for color in colors %}
+
+<button
+    type="button"
+    onclick="changeImage('{{ url_for('static', filename='uploads/' + color.image) }}',  '{{ color.color_name }}' )"
+>
+    {{ color.color_name }}
+</button>
+{% endfor %}
+    <h1>{{ product.name }}</h1>
+
+    <h2>₹{{ product.price }}</h2>
+    <h3>{{ product.description }}</h3>
+
+    <form action="/add_to_cart/{{ product.id }}" method="POST">
+
+    <h4>Select Size</h4>
+
+    {% for size in sizes %}
+
+<label class="size-option">
+
+    <input
+        type="radio"
+        name="size"
+        value="{{ size.size }}"
+        required>
+
+    <span>{{ size.size }}</span>
+
+</label>
+{% endfor %}
+
+    <br><br>
+
+    <button type="submit">
+        Add to Cart
+    </button>
+    <input
+    type="hidden"
+    id="selectedColor"
+    name="color"
+    value="{{ colors[0].color_name }}"
+>
+
+</form>
+</div>
+</div>
+<script>
+
+function changeImage(newImage, colorName)
+{
+    document.getElementById("mainImage").src = newImage;
+     document.getElementById("selectedColor").value = colorName
+}
+
+</script>
+{% endblock %}

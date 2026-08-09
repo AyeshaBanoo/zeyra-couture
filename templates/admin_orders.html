@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admin Orders
+{% endblock %}
+
+{% block content %}
+
+<form class="admin-search-form" method="GET" action="/admin_orders">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by Order ID, Name or Phone"
+        value="{{ search }}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+<h1 class="admin-orders-title">
+    Customer Orders
+</h1>
+
+{% for order in orders %}
+
+<div class="admin-order-card">
+
+    <div class="admin-customer-details">
+
+        <h2>Order ID : {{ order.order_id }}</h2>
+
+        <h3>{{ order.customer_name }}</h3>
+
+        <p><b>Date :</b> {{ order.date }}</p>
+
+        <p><b>Time :</b> {{ order.time }}</p>
+
+        <p><b>Phone :</b> {{ order.phone }}</p>
+
+        <p><b>Address :</b> {{ order.address }}</p>
+
+        <p><b>Pincode :</b> {{ order.pincode }}</p>
+
+        <p><b>Status :</b> {{ order.status }}</p>
+
+        <p><b>Payment :</b> {{ order.payment }}</p>
+
+    </div>
+
+    <div class="admin-buttons">
+
+        <a href="/confirm_order/{{ order.order_id }}">
+            <button type="button">
+                Confirm Order
+            </button>
+        </a>
+
+        <a href="/ship_order/{{ order.order_id }}">
+            <button type="button">
+                Mark as Shipped
+            </button>
+        </a>
+
+        <a href="/payment_received/{{ order.order_id }}">
+            <button type="button">
+                Payment Received
+            </button>
+        </a>
+
+    </div>
+
+    <hr>
+
+    <h3>Products</h3>
+
+    {% for item in order["items"] %}
+
+    <div class="admin-product-item">
+
+        <img
+            src="{{ url_for('static', filename='uploads/' + item.image) }}"
+            class="admin-product-img"
+            alt="{{ item.product_name }}"
+        >
+
+        <div class="admin-product-details">
+
+            <h4>{{ item.product_name }}</h4>
+
+            <p><b>Color :</b> {{ item.color }}</p>
+
+            <p><b>Size :</b> {{ item.size }}</p>
+
+            <p><b>Quantity :</b> {{ item.quantity }}</p>
+
+            <p><b>Subtotal :</b> ₹{{ item.price * item.quantity }}</p>
+
+        </div>
+
+    </div>
+
+    {% if not loop.last %}
+    <hr>
+    {% endif %}
+
+    {% endfor %}
+
+    <h3 class="admin-order-total">
+        Total : ₹{{ order.total }}
+    </h3>
+
+</div>
+
+<br>
+
+{% endfor %}
+
+{% endblock %}
